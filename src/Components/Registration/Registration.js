@@ -1,32 +1,36 @@
 import './Registration.css';
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
 
 export const Registration = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
     const [user, setUser] = useState('')
     const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    // const navigate = useNavigate();
     const sendForm = async (e) => {
         e.preventDefault();
-        console.log('form sent')
+        console.log('form sent registration')
 
         const person = {
             username,
             password,
+            email
         }
-        // console.log(person)
+        console.log(person);
 
         const res = await fetch(`http://localhost:3001/registration`, {
             method: 'POST',
+            credentials: "include",
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(person),
         })
+
+        console.log(res, 'res from registration fetch')
 
         if (res.ok) {
             const nameOfJustRegisteredPerson = await res.json();
@@ -36,16 +40,29 @@ export const Registration = () => {
             // Handle the error response
             const errorMessage = await res.json();
             // console.log(errorMessage);
-            // console.log(errorMessage.error);
-            setError(errorMessage.error);
+            if (errorMessage.error === 'Sorry, that username is already in use. Please choose a different username.') {
+                console.log('no co jesttttttt')
+                setErrorMessage('Sorry, that username is already in use. Please choose a different username.');
+            } else {
+                // console.log(errorMessage.error);
+                setError(errorMessage.error);
+                console.log(errorMessage.error, 'how does this error look like?');
+                // if we set new value in setState then our Component is rendering again with new data.
+            }
         }
     }
+    if (errorMessage) {
+        console.log('convert message to true');
+    }
+    // console.log(!!(errorMessage), '!! errorMessage');
+    // console.log(errorMessage, 'errorMessage');
 
     if (error) {
         return <>
             <h2>{error}</h2>
         </>
     }
+
 
     if (user) {
         return <>
@@ -71,6 +88,17 @@ export const Registration = () => {
                 </label>
             </p>
             <p>
+                <label className='label-email'>
+                    Email:
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                    />
+                </label>
+            </p>
+            <p>
                 <label>
                     Password:
                     <input
@@ -87,5 +115,6 @@ export const Registration = () => {
                 <button type="submit">Sign up</button>
             </p>
         </form>
+        {(errorMessage) && <p className="error-message">{errorMessage}</p>}
     </div>
 }

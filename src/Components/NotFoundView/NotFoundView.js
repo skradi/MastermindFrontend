@@ -2,7 +2,7 @@
 export const NotFoundView = () => {
 
     return <>
-        <h1>There is no such a page.</h1>
+        <h1>This page does not exists here, yet.</h1>
     </>
 
 }

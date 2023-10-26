@@ -1,20 +1,45 @@
 import React, {useState} from "react";
 import './Login.css'
+import {useNavigate} from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({ rerenderParent }) => {
+    const navigate = useNavigate();
+    // console.log(rerenderParent, 'co to takiego tu mamy login');
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const sendForm = e => {
+    const sendForm = async (e) => {
         e.preventDefault();
-        console.log('form sent')
+        console.log('form sent login')
 
         const person = {
             username,
             password,
         }
-        console.log(person)
+
+        const res = await fetch(`http://localhost:3001/login`, {
+            method: 'POST',
+            credentials: "include",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(person),
+        })
+
+        const data = await res.json();
+
+        if (res.ok) {
+            console.log(data, 'data from backend login');
+            setErrorMessage('')
+            navigate('/game');
+            rerenderParent();
+        } else if (data.error === 'incorrect username'){
+            setErrorMessage('Incorrect username');
+        } else if (data.error === 'invalid password') {
+            setErrorMessage('Invalid password');
+        }
     }
 
     return <div>
@@ -27,7 +52,7 @@ export const Login = () => {
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
-                        maxLength={20}
+                        maxLength={15}
                         minLength={3}
                         required
                     />
@@ -37,10 +62,10 @@ export const Login = () => {
                 <label>
                     Password:
                     <input
-                        type="text"
+                        type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        maxLength={20}
+                        maxLength={15}
                         minLength={4}
                         required
                     />
@@ -50,5 +75,6 @@ export const Login = () => {
                 <button type="submit">Sign in</button>
             </p>
         </form>
+        {(errorMessage) && <p className="error-message">{errorMessage}</p>}
     </div>
 }

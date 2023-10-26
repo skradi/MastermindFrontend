@@ -14,6 +14,10 @@ form {
     margin-left: -3px;
 }
 
+.label-email {
+    margin-left: 38px;
+}
+
 
 button {
     font-size: 18px;

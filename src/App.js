@@ -1,32 +1,40 @@
 import './App.css';
-import {Link, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Login} from "./Components/Login/Login";
 import {Registration} from "./Components/Registration/Registration";
 import {Game} from "./Components/Game/Game";
 import {NotFoundView} from "./Components/NotFoundView/NotFoundView";
 import {ErrorPage} from "./Components/ErrorPage/ErrorPage";
 import {Rules} from "./Components/Rules/Rules";
-
-const pass = false;
+import React, {useState} from "react";
+import {Navigation} from "./Components/Navigation/Navigation";
+import Cookies from 'universal-cookie';
 
 export const App = () => {
 
+    const [parentState, setParentState] = useState('initial state');
+
+    const handleRerender = () => {
+        // Update the state to trigger a rerender
+        setParentState(Math.random().toString());
+    }
+
+    const cookies = new Cookies();
+    const cookieJWT = cookies.get('jwt_token');
+    console.log(cookieJWT, 'JWOT COOKIE ')
+
     return <>
         <div className="container">
-            <div className="nav">
-                <div className='nav-list-item'><Link to='/rules'>Rules</Link></div>
-                <div className='nav-list-item'><Link to='/'>Login</Link></div>
-                <div className='nav-list-item'><Link to='/registration'>Registration</Link></div>
-            </div>
+            <Navigation logged={cookieJWT} rerenderParent={handleRerender} ok={34}/>
             <h1>MASTERMIND</h1>
             <div className="routes">
                 <Routes>
                     <Route path='/rules' element={<Rules/>}/>
-                    <Route path='/' element={<Login/>}/>
+                    <Route path='/' element={<Login rerenderParent={handleRerender}/>}/>
                     <Route path='/registration' element={<Registration/>}/>
                     <Route path='/error' element={<ErrorPage/>}/>
-                    {pass && <Route path='/game' element={<Game/>}/>}
                     <Route path='/*' element={<NotFoundView/>}/>
+                    <Route path='/game' element={<Game/>}/>
                 </Routes>
             </div>
         </div>
