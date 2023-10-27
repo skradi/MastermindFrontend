@@ -62,7 +62,7 @@ export const Login = ({ rerenderParent }) => {
                 <label>
                     Password:
                     <input
-                        type="password"
+                        type="text"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         maxLength={15}

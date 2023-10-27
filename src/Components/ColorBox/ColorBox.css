@@ -1,0 +1,44 @@
+.select-div {
+    width: 60px;
+    height: 60px;
+    appearance: none;
+    text-align: center;
+    border: 1px solid #000000;
+    border-radius: 50%;
+}
+
+.select-div:hover {
+    border: 1px solid #ffffff;
+}
+
+.green {
+    background-color: mediumseagreen;
+}
+
+.grey {
+    background-color: #9b977d;
+}
+
+.red {
+    background-color: #bb1515;
+}
+
+.blue {
+    background-color: #5e96d0;
+}
+
+.orange {
+    background-color: darkorange;
+}
+
+.purple {
+    background-color: mediumpurple;
+}
+
+.pink {
+    background-color: #ee37ac;
+}
+
+.yellow {
+    background-color: #c2c234;
+}

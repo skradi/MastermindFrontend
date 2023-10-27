@@ -14,6 +14,8 @@ export const App = () => {
 
     const [parentState, setParentState] = useState('initial state');
 
+    console.log(parentState);
+
     const handleRerender = () => {
         // Update the state to trigger a rerender
         setParentState(Math.random().toString());

@@ -8,9 +8,9 @@ export const Navigation = (props) => {
     const navigate = useNavigate();
 
     // console.log('cos z propsów', props.logged);
-    console.log(props.rerenderParent, 'props');
+    // console.log(props.rerenderParent, 'props');
 
-    let logged;
+    let logged ;
 
     if (props.logged) {
         logged = true;
@@ -39,8 +39,6 @@ export const Navigation = (props) => {
         } else {
             return;
         }
-
-
     }
 
     return <>
