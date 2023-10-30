@@ -10,6 +10,7 @@ import React, {useState} from "react";
 import {Navigation} from "./Components/Navigation/Navigation";
 import Cookies from 'universal-cookie';
 
+
 export const App = () => {
 
     const [parentState, setParentState] = useState('initial state');

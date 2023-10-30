@@ -1,0 +1,11 @@
+.custom-link {
+    color: blue; /* Change the text color */
+    text-decoration: none; /* Remove underlines */
+    font-weight: bold; /* Make the text bold */
+    /* Add more styles as needed */
+}
+
+.custom-link:hover {
+    color: red; /* Change the color on hover */
+    /* Add more hover styles as needed */
+}

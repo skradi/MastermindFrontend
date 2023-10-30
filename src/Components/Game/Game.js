@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Game.css';
 import { ColorBox } from '../ColorBox/ColorBox';
+import {RulesBtn} from "../RulesBtn/RulesBtn";
 
 export const Game = () => {
     const [rowCount, setRowCount] = useState(0); // Start with 0 rows
@@ -30,7 +31,6 @@ export const Game = () => {
         } else {
             throw new Error('something went really wrong');
         }
-
     };
 
     const handleClick2 = () => {
@@ -41,6 +41,7 @@ export const Game = () => {
         <div className='game-container'>
             <div className='left-container'>
                 <button onClick={handleNewGame}>New Game</button>
+                <RulesBtn/>
             </div>
             {(errorMessage) && <p className="error-message">{errorMessage}</p>}
             {gameStarted && (

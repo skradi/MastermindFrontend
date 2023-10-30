@@ -2,6 +2,8 @@ import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import './Navigation.css'
 import Cookies from "universal-cookie";
+import {RulesBtn} from "../RulesBtn/RulesBtn";
+import './Link.css';
 
 
 export const Navigation = (props) => {
@@ -36,22 +38,18 @@ export const Navigation = (props) => {
             console.log(data, 'data from fetch respons logout ');
             navigate('/')
             props.rerenderParent();
-        } else {
-            return;
         }
     }
 
     return <>
         {(logged) && <div className="nav">
-            <div className='nav-list-item'><Link to='/rules'>Rules</Link></div>
-            <div className='nav-list-item'><Link to='/game'>Game</Link></div>
-            <div className='nav-list-item'><Link to='/stats'>Stats</Link></div>
+            {/*<div className='nav-list-item'><Link to='/game' className="custom-link">Game</Link></div>*/}
             <button className='nav-list-item' onClick={handleLogout}>Logout</button>
         </div>}
         {(!logged) && <div className="nav">
-            <div className='nav-list-item'><Link to='/rules'>Rules</Link></div>
-            <div className='nav-list-item'><Link to='/'>Login</Link></div>
-            <div className='nav-list-item'><Link to='/registration'>Registration</Link></div>
+            <RulesBtn/>
+            <div className='nav-list-item'><Link to='/' className="custom-link">Login</Link></div>
+            <div className='nav-list-item'><Link to='/registration' className="custom-link">Registration</Link></div>
         </div>}
     </>
 }
