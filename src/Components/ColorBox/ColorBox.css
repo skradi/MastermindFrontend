@@ -1,44 +1,44 @@
-.select-div {
-    width: 60px;
-    height: 60px;
-    appearance: none;
-    text-align: center;
-    border: 1px solid #000000;
-    border-radius: 50%;
-}
+/*.select-div {*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*    appearance: none;*/
+/*    text-align: center;*/
+/*    border: 1px solid #000000;*/
+/*    border-radius: 50%;*/
+/*}*/
 
-.select-div:hover {
-    border: 1px solid #ffffff;
-}
+/*.select-div:hover {*/
+/*    border: 1px solid #ffffff;*/
+/*}*/
 
-.green {
-    background-color: mediumseagreen;
-}
+/*.green {*/
+/*    background-color: mediumseagreen;*/
+/*}*/
 
-.grey {
-    background-color: #9b977d;
-}
+/*.grey {*/
+/*    background-color: #9b977d;*/
+/*}*/
 
-.red {
-    background-color: #bb1515;
-}
+/*.red {*/
+/*    background-color: #bb1515;*/
+/*}*/
 
-.blue {
-    background-color: #5e96d0;
-}
+/*.blue {*/
+/*    background-color: #5e96d0;*/
+/*}*/
 
-.orange {
-    background-color: darkorange;
-}
+/*.orange {*/
+/*    background-color: darkorange;*/
+/*}*/
 
-.purple {
-    background-color: mediumpurple;
-}
+/*.purple {*/
+/*    background-color: mediumpurple;*/
+/*}*/
 
-.pink {
-    background-color: #ee37ac;
-}
+/*.pink {*/
+/*    background-color: #ee37ac;*/
+/*}*/
 
-.yellow {
-    background-color: #c2c234;
-}
+/*.yellow {*/
+/*    background-color: #c2c234;*/
+/*}*/

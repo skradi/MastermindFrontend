@@ -1,43 +1,130 @@
-.game-container {
-    background-color: #378a7e;
-    min-height: 720px;
+.game-panel-container {
+    /*background-color: #378a7e;*/
     display: flex;
 }
 
-.left-container {
+/*.game-container {*/
+/*    display: flex;*/
+/*}*/
+.row {
+    display: flex;
+}
+
+.left-game-container {
     /*background-color: cornflowerblue;*/
-    background: linear-gradient(to right, saddlebrown, sandybrown);
-    width: 100px;
-    height: 720px;
-}
-
-.middle-container {
-    /*background-color: #6f6fd3;*/
-    background: linear-gradient(to right, #4d260a, #9f6d43);
-    width: 550px;
-    height: 720px;
-}
-
-.right-container {
-    background-color: dimgrey;
+    /*background: linear-gradient(to right, saddlebrown, sandybrown);*/
     width: 150px;
-    height: 720px;
 }
 
-.game-panel {
-    height: 80px;
-    background-color: #2a2424;
-    text-align: center;
-}
-
-.button-panel {
-    margin-top: 10px;
-    width: 200px;
-}
-
-.row-game {
+.right-game-container {
+    /*background-color: #6f6fd3;*/
     display: flex;
-    flex-wrap: nowrap; /* Prevent boxes from wrapping to the next line */
-    justify-content: center;
-    margin-bottom: 10px;
+    /*background: linear-gradient(to right, #4d260a, #9f6d43);*/
+    width: 550px;
 }
+
+.game-top-container {
+    display: flex;
+}
+
+.game-info-panel {
+    margin-left: 40px;
+}
+
+.small-circles {
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie wzdłuż osi poziomej (X) */
+    align-items: center; /* Wyśrodkowanie wzdłuż osi pionowej (Y) */
+    height: 100%; /* Dodaj wysokość na przykład 100% */
+}
+
+.small-circle {
+    margin: 2px;
+    width: 20px;
+    height: 20px;
+    background: #fdfdfd;
+    border-radius: 50%;
+}
+
+.new-game-btn {
+    height: 28px;
+}
+
+.submit-btn-invisible {
+    display: none;
+}
+/*panel gracz */
+
+.panel-info {
+    display: flex;
+    margin-left: 40px;
+    color: white;
+}
+
+/*.round {*/
+/*    margin-left: 10px;*/
+/*}*/
+
+.round-number {
+    margin-left: 5px;
+}
+
+.game-info {
+    margin-left: 30px;
+}
+
+
+
+/*colors about bigcircle */
+
+.select-div {
+    width: 60px;
+    height: 60px;
+    appearance: none;
+    text-align: center;
+    border: 1px solid #000000;
+    border-radius: 50%;
+}
+
+.select-div:hover {
+    border: 1px solid #ffffff;
+}
+
+.green {
+    background-color: mediumseagreen;
+}
+
+.grey {
+    background-color: #9b977d;
+}
+
+.red {
+    background-color: #bb1515;
+}
+
+.blue {
+    background-color: #5e96d0;
+}
+
+.orange {
+    background-color: darkorange;
+}
+
+.purple {
+    background-color: mediumpurple;
+}
+
+.pink {
+    background-color: #ee37ac;
+}
+
+.yellow {
+    background-color: #c2c234;
+}
+
+.white {
+    background-color: white;
+}
+
+
+
