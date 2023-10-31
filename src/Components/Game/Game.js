@@ -95,7 +95,7 @@ export const Game = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // get selected colors
@@ -120,9 +120,25 @@ export const Game = () => {
         console.log('this message only show up if colors are different')
         // sending data to backend and handling response,
 
+        const res = await fetch(`http://localhost:3001/check`, {
+            method: 'POST',
+            credentials: "include",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(selectedValues),
+        })
+
+        const data = await res.json();
+        console.log(data);
+        console.log(data.theSame);
+        console.log(data.differentIndex);
+
+
 
         // getting values from backend
         // - new round number
+
         // - hit array lik  red red black white white
 
         const numberForNextRound = document.querySelector('.round-number');
@@ -131,7 +147,41 @@ export const Game = () => {
         // if response is positive it's time to generate new line of colors
 
         const roundNumber = Number(numberForNextRound.innerText)+1;
-        // console.log(roundNumber, typeof roundNumber, 'roundNumber')
+
+        // pobieram 5 elementow z poprzednije rundy
+        const circlesElementsInRow1 = document.querySelectorAll(`.game-container .row-${roundNumber-1} .small-circle`);
+        console.log(circlesElementsInRow1, 'to sa kolka male');
+        // ustawiam kolorki w zaleznosci od tego jaka byla odpowiedz z backendu
+        // for (let i = 0; i < circlesElementsInRow1.length; i++) {
+        //     const element = circlesElementsInRow1[i];
+        //
+        //     if (i < data.theSame) {
+        //         element.classList.add('red');
+        //     } else if (i < data.differentIndex) {
+        //         element.classList.add('black');
+        //     }
+        // }
+
+        for (let i = 0; i < 5; i++) {
+            const thesame = Number(data.theSame);
+            const different = Number(data.differentIndex);
+            const element = circlesElementsInRow1[i];
+            if (i < thesame) {
+                element.classList.add('red');
+            } else if (i < (thesame + different)) {
+                element.classList.add('black');
+            }
+        }
+
+        if (data.theSame === 5) {
+            console.log('you win!!! ')
+            const gameInfo = document.querySelector('.game-info');
+            gameInfo.innerText = 'You WIN !';
+            return
+        }
+
+
+
         const divGameContainer = document.querySelector('.game-container');
 
         const paragraphInfo = document.querySelector('.round-number');
@@ -212,77 +262,77 @@ export const Game = () => {
                     <div className='panel-info'>
                         <p className='round'></p>
                         <p className='round-number'></p>
-                        <p className='game-info'>Info from the game</p>
+                        <p className='game-info'></p>
                     </div>
                 </div>
             </div>
             <div className='game-container'>
-                <div className="row row-1">
-                    <div className='left-game-container'>
-                        <div className='small-circles'>
-                            <div className='small-circle'></div>
-                            <div className='small-circle'></div>
-                            <div className='small-circle'></div>
-                            <div className='small-circle'></div>
-                            <div className='small-circle'></div>
-                        </div>
-                    </div>
-                    <div className='right-game-container'>
-                        <form onSubmit={handleSubmit}>
-                            <select className='select-div grey' onChange={colorChange}>
-                                <option className='grey' value="grey"></option>
-                                <option className='green' value="green"></option>
-                                <option className='red' value="red"></option>
-                                <option className='blue' value="blue"></option>
-                                <option className='orange' value="orange"></option>
-                                <option className='purple' value="purple"></option>
-                                <option className='pink' value="pink"></option>
-                                <option className='yellow' value="yellow"></option>
-                            </select>
-                            <select className='select-div grey' onChange={colorChange}>
-                                <option className='grey' value="grey"></option>
-                                <option className='green' value="green"></option>
-                                <option className='red' value="red"></option>
-                                <option className='blue' value="blue"></option>
-                                <option className='orange' value="orange"></option>
-                                <option className='purple' value="purple"></option>
-                                <option className='pink' value="pink"></option>
-                                <option className='yellow' value="yellow"></option>
-                            </select>
-                            <select className='select-div grey' onChange={colorChange}>
-                                <option className='grey' value="grey"></option>
-                                <option className='green' value="green"></option>
-                                <option className='red' value="red"></option>
-                                <option className='blue' value="blue"></option>
-                                <option className='orange' value="orange"></option>
-                                <option className='purple' value="purple"></option>
-                                <option className='pink' value="pink"></option>
-                                <option className='yellow' value="yellow"></option>
-                            </select>
-                            <select className='select-div grey' onChange={colorChange}>
-                                <option className='grey' value="grey"></option>
-                                <option className='green' value="green"></option>
-                                <option className='red' value="red"></option>
-                                <option className='blue' value="blue"></option>
-                                <option className='orange' value="orange"></option>
-                                <option className='purple' value="purple"></option>
-                                <option className='pink' value="pink"></option>
-                                <option className='yellow' value="yellow"></option>
-                            </select>
-                            <select className='select-div grey' onChange={colorChange}>
-                                <option className='grey' value="grey"></option>
-                                <option className='green' value="green"></option>
-                                <option className='red' value="red"></option>
-                                <option className='blue' value="blue"></option>
-                                <option className='orange' value="orange"></option>
-                                <option className='purple' value="purple"></option>
-                                <option className='pink' value="pink"></option>
-                                <option className='yellow' value="yellow"></option>
-                            </select>
-                            <button type='submit' className='submit-btn'>Check</button>
-                        </form>
-                    </div>
-                </div>
+                {/*<div className="row row-1">*/}
+                {/*    <div className='left-game-container'>*/}
+                {/*        <div className='small-circles'>*/}
+                {/*            <div className='small-circle'></div>*/}
+                {/*            <div className='small-circle'></div>*/}
+                {/*            <div className='small-circle'></div>*/}
+                {/*            <div className='small-circle'></div>*/}
+                {/*            <div className='small-circle'></div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*    <div className='right-game-container'>*/}
+                {/*        <form onSubmit={handleSubmit}>*/}
+                {/*            <select className='select-div grey' onChange={colorChange}>*/}
+                {/*                <option className='grey' value="grey"></option>*/}
+                {/*                <option className='green' value="green"></option>*/}
+                {/*                <option className='red' value="red"></option>*/}
+                {/*                <option className='blue' value="blue"></option>*/}
+                {/*                <option className='orange' value="orange"></option>*/}
+                {/*                <option className='purple' value="purple"></option>*/}
+                {/*                <option className='pink' value="pink"></option>*/}
+                {/*                <option className='yellow' value="yellow"></option>*/}
+                {/*            </select>*/}
+                {/*            <select className='select-div grey' onChange={colorChange}>*/}
+                {/*                <option className='grey' value="grey"></option>*/}
+                {/*                <option className='green' value="green"></option>*/}
+                {/*                <option className='red' value="red"></option>*/}
+                {/*                <option className='blue' value="blue"></option>*/}
+                {/*                <option className='orange' value="orange"></option>*/}
+                {/*                <option className='purple' value="purple"></option>*/}
+                {/*                <option className='pink' value="pink"></option>*/}
+                {/*                <option className='yellow' value="yellow"></option>*/}
+                {/*            </select>*/}
+                {/*            <select className='select-div grey' onChange={colorChange}>*/}
+                {/*                <option className='grey' value="grey"></option>*/}
+                {/*                <option className='green' value="green"></option>*/}
+                {/*                <option className='red' value="red"></option>*/}
+                {/*                <option className='blue' value="blue"></option>*/}
+                {/*                <option className='orange' value="orange"></option>*/}
+                {/*                <option className='purple' value="purple"></option>*/}
+                {/*                <option className='pink' value="pink"></option>*/}
+                {/*                <option className='yellow' value="yellow"></option>*/}
+                {/*            </select>*/}
+                {/*            <select className='select-div grey' onChange={colorChange}>*/}
+                {/*                <option className='grey' value="grey"></option>*/}
+                {/*                <option className='green' value="green"></option>*/}
+                {/*                <option className='red' value="red"></option>*/}
+                {/*                <option className='blue' value="blue"></option>*/}
+                {/*                <option className='orange' value="orange"></option>*/}
+                {/*                <option className='purple' value="purple"></option>*/}
+                {/*                <option className='pink' value="pink"></option>*/}
+                {/*                <option className='yellow' value="yellow"></option>*/}
+                {/*            </select>*/}
+                {/*            <select className='select-div grey' onChange={colorChange}>*/}
+                {/*                <option className='grey' value="grey"></option>*/}
+                {/*                <option className='green' value="green"></option>*/}
+                {/*                <option className='red' value="red"></option>*/}
+                {/*                <option className='blue' value="blue"></option>*/}
+                {/*                <option className='orange' value="orange"></option>*/}
+                {/*                <option className='purple' value="purple"></option>*/}
+                {/*                <option className='pink' value="pink"></option>*/}
+                {/*                <option className='yellow' value="yellow"></option>*/}
+                {/*            </select>*/}
+                {/*            <button type='submit' className='submit-btn'>Check</button>*/}
+                {/*        </form>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         </>
     );
