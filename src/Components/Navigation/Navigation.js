@@ -44,12 +44,12 @@ export const Navigation = (props) => {
     return <>
         {(logged) && <div className="nav">
             {/*<div className='nav-list-item'><Link to='/game' className="custom-link">Game</Link></div>*/}
-            <button className='nav-list-item' onClick={handleLogout}>Logout</button>
+            <button className='nav-list-item button-84' onClick={handleLogout}>Logout</button>
         </div>}
         {(!logged) && <div className="nav">
             <RulesBtn/>
-            <div className='nav-list-item'><Link to='/' className="custom-link">Login</Link></div>
-            <div className='nav-list-item'><Link to='/registration' className="custom-link">Registration</Link></div>
+            <div className='nav-list-item button-84'><Link to='/' className="custom-link">Login</Link></div>
+            <div className='nav-list-item button-84'><Link to='/registration' className="custom-link">Registration</Link></div>
         </div>}
     </>
 }

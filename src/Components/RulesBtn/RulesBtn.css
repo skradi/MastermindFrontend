@@ -14,6 +14,7 @@
 }
 
 .modal-content {
+    top: -30px;
     width: 390px;
     max-height: 70vh; /* Maksymalna wysokość do 90% wysokości widoku */
     background-color: #333;

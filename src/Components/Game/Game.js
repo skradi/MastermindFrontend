@@ -37,6 +37,8 @@ export const Game = () => {
                 // we clean board from previous game
                 const divGameContainer = document.querySelector('.game-container');
                 divGameContainer.innerHTML = '';
+                const gameInfo = document.querySelector('.game-info');
+                gameInfo.innerText = ""
 
                 // we set text to Round 1
                 const pNumber = document.querySelector('.round-number');
@@ -82,7 +84,7 @@ export const Game = () => {
 
                 const submitButton = document.createElement('button');
                 submitButton.type = 'submit';
-                submitButton.className = 'submit-btn-1';
+                submitButton.className = 'submit-btn-1 position-btn';
                 submitButton.textContent = 'Check';
                 form.appendChild(submitButton);
                 rightContainer.appendChild(form);
@@ -113,8 +115,12 @@ export const Game = () => {
 
         if (isUnique) {
             console.log('send this data to backend');
+            const gameInfo = document.querySelector('.game-info');
+            gameInfo.innerText = ""
         } else {
             console.log('Selected colors must be unique; no duplicates allowed.')
+            const gameInfo = document.querySelector('.game-info');
+            gameInfo.innerText = "Selected colors must be unique; no duplicates allowed."
             return;
         }
         console.log('this message only show up if colors are different')
@@ -226,7 +232,7 @@ export const Game = () => {
 
         const submitButton = document.createElement('button');
         submitButton.type = 'submit';
-        submitButton.className = `submit-btn-${roundNumber}`;
+        submitButton.className = `submit-btn-${roundNumber} position-btn`;
         submitButton.textContent = 'Check';
         form.appendChild(submitButton);
         rightContainer.appendChild(form);
@@ -258,14 +264,15 @@ export const Game = () => {
             <div className='game-panel-container'>
                 <div className="game-top-container">
                     <RulesBtn>Rules</RulesBtn>
-                    <button onClick={handleNewGame} className='new-game-btn'>New Game</button>
+                    <button onClick={handleNewGame} className='new-game-btn button-84'>New Game</button>
                     <div className='panel-info'>
                         <p className='round'></p>
                         <p className='round-number'></p>
-                        <p className='game-info'></p>
+                        {/*<p className='game-info'></p>*/}
                     </div>
                 </div>
             </div>
+            <p className='game-info'></p>
             <div className='game-container'>
                 {/*<div className="row row-1">*/}
                 {/*    <div className='left-game-container'>*/}
@@ -329,7 +336,7 @@ export const Game = () => {
                 {/*                <option className='pink' value="pink"></option>*/}
                 {/*                <option className='yellow' value="yellow"></option>*/}
                 {/*            </select>*/}
-                {/*            <button type='submit' className='submit-btn'>Check</button>*/}
+                {/*            <button type='submit' className='submit-btn position-btn'>Check</button>*/}
                 {/*        </form>*/}
                 {/*    </div>*/}
                 {/*</div>*/}
