@@ -5,9 +5,9 @@ import {RulesBtn} from "../RulesBtn/RulesBtn";
 export const Game = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
-    console.log(errorMessage);
+    console.log(errorMessage)
     const handleNewGame = async () => {
-        // asking client if he wants to play new game
+        // Asking client if he wants to play new game
         const userConfirmed = window.confirm('Start a new game?');
 
         if (userConfirmed) {
@@ -17,10 +17,10 @@ export const Game = () => {
             })
 
             const data = await res.json();
-            console.log(data, 'data from game endpoint')
 
-            if (data === 'you are not login') {
+            if (data === 'you are not logged in') {
                 setErrorMessage('You need to login');
+                console.log('You need to login')
                 return;
             }
 
@@ -29,8 +29,6 @@ export const Game = () => {
             }
 
             if (data === 'new game started') {
-                console.log('game can be started')
-
                 // here we want to create first row to start the game
                 const roundNumber = 1;
 
@@ -46,7 +44,7 @@ export const Game = () => {
                 const textRound = document.querySelector('.round');
                 textRound.innerText = 'Round';
 
-
+                // we create a new whole game section
                 const newRow = document.createElement('div');
                 newRow.className = `row row-${roundNumber}`;
                 const leftContainer = document.createElement('div');
@@ -69,10 +67,10 @@ export const Game = () => {
 
                 for (let i = 0; i < 5; i++) {
                     const select = document.createElement('select');
-                    select.className = 'select-div grey';
+                    select.className = 'select-div brown';
                     select.addEventListener('change', colorChange);
 
-                    const colors = ['grey', 'green', 'red', 'blue', 'orange', 'purple', 'pink', 'yellow'];
+                    const colors = ['brown', 'green', 'red', 'blue', 'orange', 'purple', 'dgreen', 'yellow'];
                     for (const color of colors) {
                         const option = document.createElement('option');
                         option.className = color;
@@ -98,12 +96,13 @@ export const Game = () => {
     };
 
     const handleSubmit = async (e) => {
+        // we submit a form, so we need to prevent browser from refreshing
         e.preventDefault();
 
         // get selected colors
         const selectedElements = e.target.getElementsByTagName('select');
         const selectedValues = Array.from(selectedElements).map((select) => select.value);
-        console.log('values', selectedValues);
+        // console.log('values', selectedValues);
 
         // check if colors are all different
         const areAllUnique = (arr) => {
@@ -114,18 +113,17 @@ export const Game = () => {
         const isUnique = areAllUnique(selectedValues);
 
         if (isUnique) {
-            console.log('send this data to backend');
+            // send this data on server
             const gameInfo = document.querySelector('.game-info');
             gameInfo.innerText = ""
         } else {
-            console.log('Selected colors must be unique; no duplicates allowed.')
+            // Selected colors must be unique; no duplicates allowed.
             const gameInfo = document.querySelector('.game-info');
             gameInfo.innerText = "Selected colors must be unique; no duplicates allowed."
             return;
         }
-        console.log('this message only show up if colors are different')
-        // sending data to backend and handling response,
 
+        // sending data to backend and handling response,
         const res = await fetch(`http://localhost:3001/check`, {
             method: 'POST',
             credentials: "include",
@@ -136,38 +134,17 @@ export const Game = () => {
         })
 
         const data = await res.json();
-        console.log(data);
-        console.log(data.theSame);
-        console.log(data.differentIndex);
-
-
-
-        // getting values from backend
-        // - new round number
-
-        // - hit array lik  red red black white white
+        // console.log(data);
 
         const numberForNextRound = document.querySelector('.round-number');
-        // console.log(numberForNextRound.innerText);
 
         // if response is positive it's time to generate new line of colors
-
         const roundNumber = Number(numberForNextRound.innerText)+1;
 
-        // pobieram 5 elementow z poprzednije rundy
+        // getting 5 elements from prev round
         const circlesElementsInRow1 = document.querySelectorAll(`.game-container .row-${roundNumber-1} .small-circle`);
-        console.log(circlesElementsInRow1, 'to sa kolka male');
-        // ustawiam kolorki w zaleznosci od tego jaka byla odpowiedz z backendu
-        // for (let i = 0; i < circlesElementsInRow1.length; i++) {
-        //     const element = circlesElementsInRow1[i];
-        //
-        //     if (i < data.theSame) {
-        //         element.classList.add('red');
-        //     } else if (i < data.differentIndex) {
-        //         element.classList.add('black');
-        //     }
-        // }
 
+        // color small circles according to hints from data server
         for (let i = 0; i < 5; i++) {
             const thesame = Number(data.theSame);
             const different = Number(data.differentIndex);
@@ -179,15 +156,24 @@ export const Game = () => {
             }
         }
 
+        // what happened in case the player guess the solution
         if (data.theSame === 5) {
-            console.log('you win!!! ')
             const gameInfo = document.querySelector('.game-info');
             gameInfo.innerText = 'You WIN !';
-            return
+
+            // the game is end so we need to block options
+            const prevSubmitBtn = document.querySelector(`.submit-btn-${roundNumber - 1}`);
+            prevSubmitBtn.className = 'submit-btn-invisible';
+
+            const selectElementsInRow1 = document.querySelectorAll(`.game-container .row-${roundNumber - 1} select`);
+            selectElementsInRow1.forEach((select) => {
+                select.disabled = true;
+            });
+
+            return;
         }
 
-
-
+        // if there is no win yet the game is going on to the next round
         const divGameContainer = document.querySelector('.game-container');
 
         const paragraphInfo = document.querySelector('.round-number');
@@ -217,10 +203,10 @@ export const Game = () => {
 
         for (let i = 0; i < 5; i++) {
             const select = document.createElement('select');
-            select.className = 'select-div grey';
+            select.className = 'select-div brown';
             select.addEventListener('change', colorChange);
 
-            const colors = ['grey', 'green', 'red', 'blue', 'orange', 'purple', 'pink', 'yellow'];
+            const colors = ['brown', 'green', 'red', 'blue', 'orange', 'purple', 'dgreen', 'yellow'];
             for (const color of colors) {
                 const option = document.createElement('option');
                 option.className = color;
@@ -237,11 +223,10 @@ export const Game = () => {
         form.appendChild(submitButton);
         rightContainer.appendChild(form);
 
-        // pobieramy btn submit z poprzedniej lini i zmieniamy mu klase na invisible
+        // blocking options from prev round
         const prevSubmitBtn = document.querySelector(`.submit-btn-${roundNumber - 1}`);
         prevSubmitBtn.className = 'submit-btn-invisible';
 
-        // pobieramy selecty o klasie 1 i wstawiamy im klase disable true
         const selectElementsInRow1 = document.querySelectorAll(`.game-container .row-${roundNumber-1} select`);
         selectElementsInRow1.forEach((select) => {
             select.disabled = true;
@@ -251,7 +236,6 @@ export const Game = () => {
         newRow.appendChild(rightContainer);
 
         divGameContainer.appendChild(newRow);
-
     }
 
     const colorChange = (event) => {
@@ -268,79 +252,11 @@ export const Game = () => {
                     <div className='panel-info'>
                         <p className='round'></p>
                         <p className='round-number'></p>
-                        {/*<p className='game-info'></p>*/}
                     </div>
                 </div>
             </div>
             <p className='game-info'></p>
-            <div className='game-container'>
-                {/*<div className="row row-1">*/}
-                {/*    <div className='left-game-container'>*/}
-                {/*        <div className='small-circles'>*/}
-                {/*            <div className='small-circle'></div>*/}
-                {/*            <div className='small-circle'></div>*/}
-                {/*            <div className='small-circle'></div>*/}
-                {/*            <div className='small-circle'></div>*/}
-                {/*            <div className='small-circle'></div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*    <div className='right-game-container'>*/}
-                {/*        <form onSubmit={handleSubmit}>*/}
-                {/*            <select className='select-div grey' onChange={colorChange}>*/}
-                {/*                <option className='grey' value="grey"></option>*/}
-                {/*                <option className='green' value="green"></option>*/}
-                {/*                <option className='red' value="red"></option>*/}
-                {/*                <option className='blue' value="blue"></option>*/}
-                {/*                <option className='orange' value="orange"></option>*/}
-                {/*                <option className='purple' value="purple"></option>*/}
-                {/*                <option className='pink' value="pink"></option>*/}
-                {/*                <option className='yellow' value="yellow"></option>*/}
-                {/*            </select>*/}
-                {/*            <select className='select-div grey' onChange={colorChange}>*/}
-                {/*                <option className='grey' value="grey"></option>*/}
-                {/*                <option className='green' value="green"></option>*/}
-                {/*                <option className='red' value="red"></option>*/}
-                {/*                <option className='blue' value="blue"></option>*/}
-                {/*                <option className='orange' value="orange"></option>*/}
-                {/*                <option className='purple' value="purple"></option>*/}
-                {/*                <option className='pink' value="pink"></option>*/}
-                {/*                <option className='yellow' value="yellow"></option>*/}
-                {/*            </select>*/}
-                {/*            <select className='select-div grey' onChange={colorChange}>*/}
-                {/*                <option className='grey' value="grey"></option>*/}
-                {/*                <option className='green' value="green"></option>*/}
-                {/*                <option className='red' value="red"></option>*/}
-                {/*                <option className='blue' value="blue"></option>*/}
-                {/*                <option className='orange' value="orange"></option>*/}
-                {/*                <option className='purple' value="purple"></option>*/}
-                {/*                <option className='pink' value="pink"></option>*/}
-                {/*                <option className='yellow' value="yellow"></option>*/}
-                {/*            </select>*/}
-                {/*            <select className='select-div grey' onChange={colorChange}>*/}
-                {/*                <option className='grey' value="grey"></option>*/}
-                {/*                <option className='green' value="green"></option>*/}
-                {/*                <option className='red' value="red"></option>*/}
-                {/*                <option className='blue' value="blue"></option>*/}
-                {/*                <option className='orange' value="orange"></option>*/}
-                {/*                <option className='purple' value="purple"></option>*/}
-                {/*                <option className='pink' value="pink"></option>*/}
-                {/*                <option className='yellow' value="yellow"></option>*/}
-                {/*            </select>*/}
-                {/*            <select className='select-div grey' onChange={colorChange}>*/}
-                {/*                <option className='grey' value="grey"></option>*/}
-                {/*                <option className='green' value="green"></option>*/}
-                {/*                <option className='red' value="red"></option>*/}
-                {/*                <option className='blue' value="blue"></option>*/}
-                {/*                <option className='orange' value="orange"></option>*/}
-                {/*                <option className='purple' value="purple"></option>*/}
-                {/*                <option className='pink' value="pink"></option>*/}
-                {/*                <option className='yellow' value="yellow"></option>*/}
-                {/*            </select>*/}
-                {/*            <button type='submit' className='submit-btn position-btn'>Check</button>*/}
-                {/*        </form>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-            </div>
+            <div className='game-container'></div>
         </>
     );
 };

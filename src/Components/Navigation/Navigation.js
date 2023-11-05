@@ -1,7 +1,6 @@
 import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import './Navigation.css'
-import Cookies from "universal-cookie";
 import {RulesBtn} from "../RulesBtn/RulesBtn";
 import './Link.css';
 
@@ -24,32 +23,30 @@ export const Navigation = (props) => {
         const userWantToLogout = window.confirm('Are you sure you want to logout?');
 
         if (userWantToLogout) {
-            const cookies = new Cookies();
-            const token = cookies.get('jwt_token');
-            console.log(token);
-
-            console.log('befor fetch');
             const res = await fetch('http://localhost:3001/logout', {
                 credentials: "include",
             });
-            console.log('after fetch');
-            console.log(res);
             const data = await res.json();
-            console.log(data, 'data from fetch respons logout ');
+            console.log(data, 'data from fetch response logout ');
             navigate('/')
             props.rerenderParent();
         }
     }
 
+    const leaderboard = () => {
+        alert('This section is on the roadmap, and the anticipated time for its implementation is January 2024');
+    }
+
     return <>
         {(logged) && <div className="nav">
-            {/*<div className='nav-list-item'><Link to='/game' className="custom-link">Game</Link></div>*/}
+            <p className='username'>{props.username}</p>
+            <button className='button-84' onClick={leaderboard}>Leaderboard</button>
             <button className='nav-list-item button-84' onClick={handleLogout}>Logout</button>
         </div>}
         {(!logged) && <div className="nav">
             <RulesBtn/>
-            <div className='nav-list-item button-84'><Link to='/' className="custom-link">Login</Link></div>
-            <div className='nav-list-item button-84'><Link to='/registration' className="custom-link">Registration</Link></div>
+            <div className='nav-list-item button-84'><Link to='/' className="custom-link" style={{ padding: 0 }}>Login</Link></div>
+            <div className='nav-list-item button-84'><Link to='/registration' className="custom-link" style={{ padding: 0 }}>Registration</Link></div>
         </div>}
     </>
 }

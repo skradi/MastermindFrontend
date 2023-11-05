@@ -7,3 +7,13 @@
     color: #4eb01d;
     background: #4eb01d;
 }
+
+.nav {
+    position: relative;
+}
+
+.username {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}

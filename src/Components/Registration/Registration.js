@@ -12,14 +12,13 @@ export const Registration = () => {
 
     const sendForm = async (e) => {
         e.preventDefault();
-        console.log('form sent registration')
 
         const person = {
             username,
             password,
             email
         }
-        console.log(person);
+        // console.log(person);
 
         const res = await fetch(`http://localhost:3001/registration`, {
             method: 'POST',
@@ -30,18 +29,17 @@ export const Registration = () => {
             body: JSON.stringify(person),
         })
 
-        console.log(res, 'res from registration fetch')
+        // console.log(res, 'res from registration fetch')
 
         if (res.ok) {
             const nameOfJustRegisteredPerson = await res.json();
-            // console.log(nameOfJustRegisteredPerson);
             setUser(nameOfJustRegisteredPerson);
         } else {
             // Handle the error response
             const errorMessage = await res.json();
             // console.log(errorMessage);
             if (errorMessage.error === 'Sorry, that username is already in use. Please choose a different username.') {
-                console.log('no co jesttttttt')
+                console.log('wtf')
                 setErrorMessage('Sorry, that username is already in use. Please choose a different username.');
             } else {
                 // console.log(errorMessage.error);
@@ -54,8 +52,6 @@ export const Registration = () => {
     if (errorMessage) {
         console.log('convert message to true');
     }
-    // console.log(!!(errorMessage), '!! errorMessage');
-    // console.log(errorMessage, 'errorMessage');
 
     if (error) {
         return <>

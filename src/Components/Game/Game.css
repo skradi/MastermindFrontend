@@ -91,6 +91,7 @@
 /*colors about bigcircle */
 
 .select-div {
+    margin: 2px;
     width: 60px;
     height: 60px;
     appearance: none;
@@ -109,11 +110,12 @@ option:hover {
     border: 1px solid #ffffff;
 }
 
+
 .green {
     background-color: mediumseagreen;
 }
 
-.grey {
+.brown {
     background-color: #693c3c;
 }
 
@@ -133,7 +135,7 @@ option:hover {
     background-color: mediumpurple;
 }
 
-.pink {
+.dgreen {
     background-color: #1f460c;
 }
 

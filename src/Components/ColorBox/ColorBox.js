@@ -1,13 +1,11 @@
 import React from "react";
 import './ColorBox.css'
 
-
 export const ColorBox = props => {
 
     const colorChange = (event) => {
         const select = event.target;
         const selectedValue = select.value;
-        // console.log(selectedValue, 'selectedValue');
         select.className = 'select-div ' + selectedValue;
     }
 

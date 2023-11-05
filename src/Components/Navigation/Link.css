@@ -3,6 +3,7 @@
     text-decoration: none; /* Remove underlines */
     font-weight: bold; /* Make the text bold */
     /* Add more styles as needed */
+    padding: 0;
 }
 
 .custom-link:hover {

@@ -3,6 +3,6 @@
 export const ErrorPage = () => {
 
     return <>
-        <h1>some error happend</h1>
+        <h1>An error happened</h1>
     </>
 }

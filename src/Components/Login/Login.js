@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 
 export const Login = ({ rerenderParent }) => {
     const navigate = useNavigate();
-    // console.log(rerenderParent, 'co to takiego tu mamy login');
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +11,6 @@ export const Login = ({ rerenderParent }) => {
 
     const sendForm = async (e) => {
         e.preventDefault();
-        console.log('form sent login')
 
         const person = {
             username,
@@ -31,10 +29,9 @@ export const Login = ({ rerenderParent }) => {
         const data = await res.json();
 
         if (res.ok) {
-            console.log(data, 'data from backend login');
             setErrorMessage('')
             navigate('/game');
-            rerenderParent();
+            rerenderParent(data.username);
         } else if (data.error === 'incorrect username'){
             setErrorMessage('Incorrect username');
         } else if (data.error === 'invalid password') {
