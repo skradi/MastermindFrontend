@@ -3,24 +3,17 @@
     display: flex;
 }
 
-/*.game-container {*/
-/*    display: flex;*/
-/*}*/
 .row {
     display: flex;
 }
 
 .left-game-container {
-    /*background-color: cornflowerblue;*/
-    /*background: linear-gradient(to right, saddlebrown, sandybrown);*/
     width: 150px;
 }
 
 .right-game-container {
-    /*background-color: #6f6fd3;*/
     display: flex;
     justify-content: center;
-    /*background: linear-gradient(to right, #4d260a, #9f6d43);*/
     width: 550px;
     position: relative;
 }
@@ -98,7 +91,6 @@
     text-align: center;
     border: 1px solid #000000;
     border-radius: 50%;
-    /*box-shadow: 0 5px 15px rgba(0,0,0,0.3);*/
     box-shadow: inset -25px -25px 40px rgba(0,0,0,.5);
 }
 
