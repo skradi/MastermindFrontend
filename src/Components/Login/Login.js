@@ -27,6 +27,7 @@ export const Login = ({ rerenderParent }) => {
         })
 
         const data = await res.json();
+        console.log('data');
 
         if (res.ok) {
             setErrorMessage('')

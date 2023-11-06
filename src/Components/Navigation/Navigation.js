@@ -40,7 +40,7 @@ export const Navigation = (props) => {
     return <>
         {(logged) && <div className="nav">
             <p className='username'>{props.username}</p>
-            <button className='button-84' onClick={leaderboard}>Leaderboard</button>
+            {/*<button className='button-84' onClick={leaderboard}>Leaderboard</button>*/}
             <button className='nav-list-item button-84' onClick={handleLogout}>Logout</button>
         </div>}
         {(!logged) && <div className="nav">

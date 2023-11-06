@@ -62,6 +62,12 @@
     color: white;
 }
 
+@media (max-width: 480px) {
+    .position-btn {
+        left: 70px;
+    }
+}
+
 /*panel gracza */
 
 .panel-info {
@@ -70,6 +76,15 @@
     color: white;
     font-size: 20px;
 }
+
+@media (max-width: 400px) {
+    .panel-info {
+        margin-left: 5px;
+        font-size: 16px;
+    }
+}
+
+
 
 .round-number {
     margin-left: 5px;
@@ -92,6 +107,20 @@
     border: 1px solid #000000;
     border-radius: 50%;
     box-shadow: inset -25px -25px 40px rgba(0,0,0,.5);
+}
+
+@media (max-width: 460px) {
+    .select-div {
+        margin: 1px;
+    }
+}
+
+@media (max-width: 445px) {
+    .select-div {
+        width: 40px;
+        height: 40px;
+
+    }
 }
 
 option:hover {
