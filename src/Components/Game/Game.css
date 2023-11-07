@@ -74,10 +74,10 @@
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 370px) {
     .position-btn {
         left: 10px;
-        top: 124px;
+        top: 110px;
     }
 }
 
@@ -135,8 +135,8 @@
 @media (max-width: 460px) {
     .select-div {
         margin: 1px;
-        width: 55px;
-        height: 55px;
+        width: 40px;
+        height: 40px;
     }
 }
 
