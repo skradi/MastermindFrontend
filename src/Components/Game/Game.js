@@ -75,6 +75,7 @@ export const Game = () => {
                         const option = document.createElement('option');
                         option.className = color;
                         option.value = color;
+                        option.textContent = color;
                         select.appendChild(option);
                     }
                     form.appendChild(select);
@@ -211,6 +212,7 @@ export const Game = () => {
                 const option = document.createElement('option');
                 option.className = color;
                 option.value = color;
+                option.textContent = color;
                 select.appendChild(option);
             }
             form.appendChild(select);
