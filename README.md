@@ -1,4 +1,4 @@
-# Mastermind - small logic game (frontend)
+# Mastermind - small logic game (frontend React)
 
 ![mastermind](https://github.com/skradi/MastermindFrontend/assets/144287736/cea7d934-2ae3-462b-a446-54b22c599adf)
 
@@ -9,8 +9,8 @@ In the project directory, you can run:
 
 ### Links
 
-Link to the Mastermind page: [mastermind](https://mastermind.elosito.usermd.net).
-Link to gitHub mastermind backend: [backend](https://github.com/skradi/MastermindBackend).
+Link to the Mastermind page: [mastermind](https://mastermind.elosito.usermd.net).<br>
+Link to gitHub mastermind backend: https://github.com/skradi/MastermindBackend.
 
 ### Roadmap 
 For now, you can only play solo games, but in the future, I plan to add some features: 
