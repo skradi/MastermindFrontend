@@ -62,9 +62,16 @@
     color: white;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
     .position-btn {
         left: 70px;
+    }
+}
+
+@media (max-width: 420px) {
+    .position-btn {
+        left: 10px;
+        top: 124px;
     }
 }
 
@@ -106,7 +113,7 @@
     height: 60px;
     appearance: none;
     text-align: center;
-    border: 1px solid #000000;
+    border: 1px none #000000;
     border-radius: 50%;
     box-shadow: inset -25px -25px 40px rgba(0,0,0,.5);
 }
@@ -115,16 +122,18 @@
 @media (max-width: 460px) {
     .select-div {
         margin: 1px;
+        width: 55px;
+        height: 55px;
     }
 }
 
-@media (max-width: 445px) {
-    .select-div {
-        width: 40px;
-        height: 40px;
-        font-size: 5px;
-    }
-}
+/*@media (max-width: 445px) {*/
+/*    .select-div {*/
+/*        width: 40px;*/
+/*        height: 40px;*/
+/*        font-size: 5px;*/
+/*    }*/
+/*}*/
 
 option:hover {
     background-color: #4eb01d;
